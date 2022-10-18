@@ -77,14 +77,16 @@ function calculos(){
     echo "Interes = $tipo%.                        Intereses    = $inttotal"                     
     echo "Plazo   = $plazo meses.                  Pago total   = $pagototal"
     echo "****************************************************************"
-    echo "Mes      Pendiente        Capital        Interes       Cuota    "
+    echo "Mes       Pendiente        Capital        Interes       Cuota    "
     echo "****************************************************************"
 
     for ($i=0 ; $i -lt $plazo; $i++)
     {
         #Informamos el numero de meses
         $j = $i + 1 
+	
 
+	
         #Dejamos bonito el espacio1
         if ($j -lt 10) {
             $espacio1 = "      "
@@ -94,8 +96,22 @@ function calculos(){
             $espacio1 = "    "
         }
 
-        Write-Host $j $espacio1 $global:pendiente[$i] "       " $global:pcapital[$i] "     " $global:pinteres[$i] "      " $global:cround
+	#Dejamos bonito el espacio2
+	
 
+        #Write-Host $j $espacio1 "$("{0:N2}" -f $global:pendiente[$i])" "       " "$("{0:N2}" -f $global:pcapital[$i])" "     " "$("{0:N2}" -f $global:pinteres[$i])" "      " "$("{0:N2}" -f $global:cround)"
+	
+	$mipendiente = "$("{0:N2}" -f $global:pendiente[$i])"
+	$micapital = "$("{0:N2}" -f $global:pcapital[$i])"
+	$miinteres = "$("{0:N2}" -f $global:pinteres[$i])"
+	$micuota = "$("{0:N2}" -f $global:cround)"
+	
+	Write-Host $j $espacio1 (" " * (10 - $mipendiente.tostring().length))  "$("{0:N2}" -f $global:pendiente[$i])" -nonewline
+	Write-Host (" " *(14 - $micapital.tostring().length)) "$("{0:N2}" -f $global:pcapital[$i])" -nonewline
+	Write-Host (" " *(12 - $miinteres.tostring().length)) "$("{0:N2}" -f $global:pinteres[$i])" -nonewline
+	Write-Host (" " *(14 - $micuota.tostring().length)) "$("{0:N2}" -f $global:cround)" 
+
+	
     }
 
     echo "****************************************************************"
