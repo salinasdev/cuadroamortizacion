@@ -70,16 +70,25 @@ function calculos(){
     $inttotal = [math]::round($inttotal,2)
     $pagototal = [double]$forma + [double]$inttotal
 
-    echo "****************************************************************"
-    echo "Calculo by Victor Salinas"
-    echo "****************************************************************"
-    echo "Capital = $forma euros.                Pago mensual = $cround"
-    echo "Interes = $tipo%.                        Intereses    = $inttotal"                     
-    echo "Plazo   = $plazo meses.                  Pago total   = $pagototal"
-    echo "****************************************************************"
-    echo "Mes       Pendiente        Capital        Interes       Cuota    "
-    echo "****************************************************************"
+    $resumenCapital = "Capital = $forma euros."
+    $resumenIntereses = "Interes = $tipo%."
+    $resumenPlazo = "Plazo   = $plazo meses."
 
+    $resumenMensual = "Pago mensual = $("{0:N2}" -f $cround)."
+    $resumenIntTotal = "Intereses    = $("{0:N2}" -f $inttotal)."
+    $resumenPagoTotal = "Pago total   =  $("{0:N2}" -f $pagototal)."
+    
+    Write-Host "****************************************************************"
+    Write-Host "**************    Calculo by Victor Salinas    *****************"
+    Write-Host "****************************************************************"
+
+    Write-Host $resumenCapital (" " * (36 -  $resumenCapital.tostring().length)) $resumenMensual
+    Write-Host $resumenIntereses (" " * (36 -  $resumenIntereses.tostring().length)) $resumenIntTotal
+    Write-Host $resumenPlazo (" " * (36 -  $resumenPlazo.tostring().length)) $resumenPagoTotal
+
+    Write-Host "****************************************************************"
+    Write-Host "Mes         Pendiente       Capital        Intereses      Cuota "
+    Write-Host "****************************************************************"
     for ($i=0 ; $i -lt $plazo; $i++)
     {
         #Informamos el numero de meses
@@ -113,20 +122,22 @@ function calculos(){
 
 	
     }
+	
 
-    echo "****************************************************************"
-    echo "Calculo by Victor Salinas"
-    echo "****************************************************************"
-    echo "Capital = $forma euros.                Pago mensual = $cround"
-    echo "Interes = $tipo%.                        Intereses    = $inttotal"                     
-    echo "Plazo   = $plazo meses.                  Pago total   = $pagototal"
-    echo "****************************************************************"
+    Write-Host "****************************************************************"
+    Write-Host "**************    Calculo by Victor Salinas    *****************"
+    Write-Host "****************************************************************"
 
+    Write-Host $resumenCapital (" " * (36 -  $resumenCapital.tostring().length)) $resumenMensual
+    Write-Host $resumenIntereses (" " * (36 -  $resumenIntereses.tostring().length)) $resumenIntTotal
+    Write-Host $resumenPlazo (" " * (36 -  $resumenPlazo.tostring().length)) $resumenPagoTotal
+
+    Write-Host "****************************************************************"
 }
 #DEJAMOS BONITA LA PANTALLA:
 $a = (Get-Host).UI.RawUI 
 $a.ForegroundColor = "Yellow" 
-$a.BackgroundColor = "DarkBlue" 
+#$a.BackgroundColor = "DarkBlue" 
 $a.WindowTitle     = "Calculo del cuadro by Victor Salinas"
 Clear-Host
 
